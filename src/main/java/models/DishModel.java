@@ -4,8 +4,8 @@ import java.io.File;
 
 public class DishModel {
     private int id;
-    private String name;
-    private String description;
+    public String name;
+    public String description;
     private int cost;
     private File image;
 

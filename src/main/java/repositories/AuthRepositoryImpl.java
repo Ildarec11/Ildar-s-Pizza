@@ -16,11 +16,11 @@ public class AuthRepositoryImpl implements AuthRepository{
 
     private Connection connection;
 
-    private final String SQL_FIND_BY_COOKIE_VALUE = "SELECT *, id as auth_id, users.id as user_id FROM auth INNER JOIN users ON auth.user_id=users.id WHERE auth.cookie_value=?";
-    private final String SQL_INSERT_AUTH = "INSERT INTO auth (user_id, cookie_value)\n" +
-            "VALUES(? , ? ) \n" +
-            "ON CONFLICT (user_id) \n" +
-            "DO \n" +
+    private final String SQL_FIND_BY_COOKIE_VALUE = "SELECT *, auth.id as auth_id, users.id as user_id FROM auth INNER JOIN users ON auth.user_id=users.id WHERE auth.cookie_value=?";
+    private final String SQL_INSERT_ADD_COOKIES = "INSERT INTO auth (user_id, cookie_value)" +
+            "VALUES(? , ? ) " +
+            "ON CONFLICT (user_id) " +
+            "DO" +
             "   UPDATE SET cookie_value = ?";
     private final String SQL_CHECK_IS_ADMIN_BY_ID = "SELECT * FROM admins_user_id WHERE user_id = ?";
 
@@ -30,43 +30,44 @@ public class AuthRepositoryImpl implements AuthRepository{
     }
 
     @Override
-    public AuthModel findByCookieValue(Cookie cookie) {
+    public AuthModel findByCookieValue(String cookieValue) {
         ResultSet resultSet = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_BY_COOKIE_VALUE);
-            preparedStatement.setString(1, cookie.getValue());
+            preparedStatement.setString(1, cookieValue);
             resultSet = preparedStatement.executeQuery();
             AuthModel auth = authRowMapper.rowMap(resultSet);
             return auth;
         } catch (Exception e) {
+            System.out.println("Unable to find user");
             return null;
         }
     }
 
     @Override
-    public boolean checkIsAdminByCookieValue(Cookie cookie) {
-        AuthModel authModel = findByCookieValue(cookie);
+    public boolean checkIsAdminByCookieValue(String cookieValue) {
+        AuthModel authModel = findByCookieValue(cookieValue);
         ResultSet resultSet = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_CHECK_IS_ADMIN_BY_ID);
             preparedStatement.setInt(1, authModel.getUserModel().getId());
             resultSet = preparedStatement.executeQuery();
             if (!resultSet.next()) {
-                return true;
+                return false;
             }
         } catch (Exception e) {
             return false;
         }
-        return false;
+        return true;
     }
 
     @Override
-    public void setCookiesForUser(UserModel userModel, Cookie cookie) {
+    public void setCookiesForUser(UserModel userModel, String cookieValue) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_AUTH);
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_ADD_COOKIES);
             preparedStatement.setInt(1, userModel.getId());
-            preparedStatement.setString(2, cookie.getValue());
-            preparedStatement.setString(3, cookie.getValue());
+            preparedStatement.setString(2, cookieValue);
+            preparedStatement.setString(3, cookieValue);
             preparedStatement.execute();
         } catch (SQLException e) {
             System.out.println("Error set cookies");

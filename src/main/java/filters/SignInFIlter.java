@@ -1,12 +1,8 @@
 package filters;
 
-import Services.UserService;
-import Services.UserServiceImpl;
 import models.AuthModel;
 import repositories.AuthRepository;
 import repositories.AuthRepositoryImpl;
-import repositories.UserRepository;
-import repositories.UserRepositoryImpl;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -38,11 +34,14 @@ public class SignInFIlter extends HttpFilter {
         Cookie[] cookies = httpServletRequest.getCookies();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("auth")) {
-                AuthModel authModel = authRepository.findByCookieValue(cookie);
+                AuthModel authModel = authRepository.findByCookieValue(cookie.getValue());
                 if (authModel != null) {
+                    req.setAttribute("auth", authModel);
                     //вход с передачей данных о пользователе
-                    ((HttpServletResponse) res).sendRedirect("/");
+                    chain.doFilter(req, res);
                     System.out.println("вошли");
+                } else {
+                    ((HttpServletResponse) res).sendRedirect("/signIn");
                 }
             }
         }

@@ -5,6 +5,7 @@
   Time: 15:38
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -28,108 +29,25 @@
                 <li><a href="/profile">Profile</a></li>
             </ul>
         </nav>
-
-        <div class="cards">
+        <c:forEach items="${menu}" var="dish">
             <div class="card">
                 <img class="card__image" src="https://fakeimg.pl/400x300/252c6a/fff/" alt="">
                 <div class="card__content">
                     <p>
-                        Description of a dish
+                        ${dish.description}
                     </p>
                     <h2>
-                        Dish name
+                        ${dish.name}
                     </h2>
                 </div>
                 <div class="card__info">
                     <div>
-                        <i class="material-icons">attach_money</i>50
+                        <i class="material-icons">attach_money</i>
+                        ${dish.cost}
                     </div>
                 </div>
             </div>
-
-            <div class="card">
-                <img class="card__image" src="https://fakeimg.pl/400x300/252c6a/fff/" alt="">
-                <div class="card__content">
-                    <p>
-                        Description of a dish
-                    </p>
-                    <h2>
-                        Dish name
-                    </h2>
-                </div>
-                <div class="card__info">
-                    <div>
-                        <i class="material-icons">attach_money</i>50
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card__image" src="https://fakeimg.pl/400x300/252c6a/fff/" alt="">
-                <div class="card__content">
-                    <p>
-                        Description of a dish
-                    </p>
-                    <h2>
-                        Dish name
-                    </h2>
-                </div>
-                <div class="card__info">
-                    <div>
-                        <i class="material-icons">attach_money</i>50
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card__image" src="https://fakeimg.pl/400x300/252c6a/fff/" alt="">
-                <div class="card__content">
-                    <p>
-                        Description of a dish
-                    </p>
-                    <h2>
-                        Dish name
-                    </h2>
-                </div>
-                <div class="card__info">
-                    <div>
-                        <i class="material-icons">attach_money</i>50
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card__image" src="https://fakeimg.pl/400x300/252c6a/fff/" alt="">
-                <div class="card__content">
-                    <p>
-                        Description of a dish
-                    </p>
-                    <h2>
-                        Dish name
-                    </h2>
-                </div>
-                <div class="card__info">
-                    <div>
-                        <i class="material-icons">attach_money</i>50
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <img class="card__image" src="https://fakeimg.pl/400x300/252c6a/fff/" alt="">
-                <div class="card__content">
-                    <p>
-                        Description of a dish
-                    </p>
-                    <h2>
-                        Dish name
-                    </h2>
-                </div>
-                <div class="card__info">
-                    <div>
-                        <i class="material-icons">attach_money</i>50
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+        </c:forEach>
     </div>
     <div id="content">
     </div>

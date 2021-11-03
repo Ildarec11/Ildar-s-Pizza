@@ -5,6 +5,15 @@ public class UserModel {
     private String fullName;
     private String email;
     private String password;
+    private String money;
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
 
     public int getId() {
         return id;
