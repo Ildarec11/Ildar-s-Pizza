@@ -1,5 +1,6 @@
 package services;
 
+import forms.DishForm;
 import models.DishModel;
 import repositories.DishRepository;
 
@@ -16,6 +17,11 @@ public class DishServiceImpl implements DishService{
     @Override
     public List<DishModel> getAllDishes() {
         return dishRepository.findAll();
+    }
+
+    @Override
+    public void addDish(DishForm dishForm) {
+        dishRepository.addDish(dishForm);
     }
 
 }

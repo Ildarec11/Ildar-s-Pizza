@@ -1,5 +1,6 @@
 package repositories;
 
+import forms.DishForm;
 import mapper.RowMapper;
 import models.AuthModel;
 import models.DishModel;
@@ -16,6 +17,7 @@ public class DishRepositoryImpl implements DishRepository {
     private Connection connection;
 
     private final String SQL_FIND_ALL = "SELECT * FROM dish";
+    private final String SQL_INSERT_DISH = "INSERT INTO dish(name, description, cost) values (?, ?, ?)";
 
     public DishRepositoryImpl(Connection connection) {
         this.connection = connection;
@@ -62,4 +64,17 @@ public class DishRepositoryImpl implements DishRepository {
         }
         return products;
     });
+
+    @Override
+    public void addDish(DishForm dishForm) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_DISH);
+            preparedStatement.setString(1, dishForm.getName());
+            preparedStatement.setString(2, dishForm.getDescription());
+            preparedStatement.setInt(3, dishForm.getCost());
+            preparedStatement.execute();
+        } catch (Exception e) {
+            System.out.println("Cant add dishes");
+        }
+    }
 }
