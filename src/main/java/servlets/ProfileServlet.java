@@ -1,12 +1,13 @@
 package servlets;
 
+import models.BoughtDish;
+import models.PurchaseHistoryModel;
+import repositories.*;
+import services.DishService;
+import services.DishServiceImpl;
 import services.UserService;
 import services.UserServiceImpl;
 import models.AuthModel;
-import repositories.AuthRepository;
-import repositories.AuthRepositoryImpl;
-import repositories.UserRepository;
-import repositories.UserRepositoryImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.UnavailableException;
@@ -18,11 +19,14 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
 
     private UserService userService;
+    private DishService dishService;
     private final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
     private final String DB_USERNAME = "postgres";
     private final String DB_PASSWORD = "postgres";
@@ -33,6 +37,15 @@ public class ProfileServlet extends HttpServlet {
         AuthModel authModel = (AuthModel) req.getAttribute("auth");
         req.setAttribute("user", authModel.getUserModel());
         boolean isAdmin = userService.checkIsAdminByCookieValue(authModel.getCoolieValue());
+        List<PurchaseHistoryModel> history = dishService.getPurchaseHistoryByUserId(authModel.getUserModel().getId());
+        List<BoughtDish> boughtDishes = new ArrayList<>();
+        for (PurchaseHistoryModel purchase: history) {
+            BoughtDish boughtDish = new BoughtDish();
+            boughtDish.setDishModel(dishService.findById(purchase.getDishId()));
+            boughtDish.setPurchaseHistoryModel(purchase);
+            boughtDishes.add(boughtDish);
+        }
+        req.setAttribute("bought", boughtDishes);
         if (isAdmin) {
             req.getRequestDispatcher("WEB-INF/jsp/ProfileAdmin.jsp").forward(req, resp);
         } else {
@@ -54,7 +67,9 @@ public class ProfileServlet extends HttpServlet {
 
             UserRepository userRepository = new UserRepositoryImpl(connection);
             AuthRepository authRepository = new AuthRepositoryImpl(connection);
-            userService = new UserServiceImpl(userRepository, authRepository);
+            DishRepository dishRepository = new DishRepositoryImpl(connection);
+            userService = new UserServiceImpl(userRepository, authRepository, dishRepository);
+            dishService = new DishServiceImpl(dishRepository);
         } catch (SQLException | ClassNotFoundException e) {
             throw new UnavailableException("Unavailable");
         }

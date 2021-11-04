@@ -2,7 +2,7 @@ services/DishServiceImpl.class
 servlets/AddDishServlet.class
 forms/SignUpUserForm.class
 repositories/AuthRepository.class
-models/DiscountsModel.class
+models/BoughtDish.class
 repositories/UserRepository.class
 forms/DishForm.class
 models/AuthModel.class
@@ -13,6 +13,7 @@ repositories/AuthRepositoryImpl.class
 services/DishService.class
 repositories/UserRepositoryImpl.class
 models/DishModel.class
+servlets/BuyPizzaServlet.class
 servlets/RegistrationServlet.class
 repositories/DishRepository.class
 mapper/RowMapper.class
@@ -22,5 +23,8 @@ servlets/MenuServlet.class
 services/UserServiceImpl.class
 repositories/DishRepositoryImpl.class
 models/UserModel.class
+models/PurchaseHistoryModel.class
 servlets/AuthenticationServlet.class
 filters/ProfileFilter.class
+models/DiscountModel.class
+filters/MoneyFilter.class

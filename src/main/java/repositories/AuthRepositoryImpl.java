@@ -105,7 +105,8 @@ public class AuthRepositoryImpl implements AuthRepository{
             user.setFullName(resultSet.getString("full_name"));
             user.setEmail(resultSet.getString("email"));
             user.setPassword(resultSet.getString("password"));
-
+            System.out.println(resultSet.getBigDecimal("money"));
+            user.setMoney(resultSet.getBigDecimal("money"));
             authModel.setUserModel(user);
             return authModel;
         } else {

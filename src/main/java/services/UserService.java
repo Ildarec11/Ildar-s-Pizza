@@ -3,6 +3,7 @@ package services;
 import forms.SignInUserForm;
 import forms.SignUpUserForm;
 import models.AuthModel;
+import models.DishModel;
 import models.UserModel;
 
 import javax.servlet.http.Cookie;
@@ -17,4 +18,6 @@ public interface UserService {
     AuthModel getAuthByCookie(String cookieValue);
 
     UserModel getUserByCookie(String cookieValue);
+
+    void buyDish(UserModel userModel, DishModel dishModel);
 }

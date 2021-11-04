@@ -29,7 +29,6 @@
                 <li><a href="/profile">Profile</a></li>
             </ul>
         </nav>
-
         <c:set var="user" value='${requestScope["user"]}' />
 
         <h1>${user.fullName}</h1>
@@ -39,6 +38,36 @@
         </ul>
 
 
+        <div class="cards">
+            <c:forEach items="${bought}" var="bought">
+                <div class="card">
+                    <img class="card__image" src="https://fakeimg.pl/400x300/252c6a/fff/" alt="">
+                    <div class="card__content">
+                        <p>
+                                ${bought.dishModel.description}
+                        </p>
+                        <h2>
+                                ${bought.dishModel.name}
+                        </h2>
+                    </div>
+                    <div class="card__info">
+                        <div>
+                            <i class="material-icons">attach_money</i>
+                                ${bought.purchaseHistoryModel.cost}
+                        </div>
+                        <i>
+                            <strike> ${bought.dishModel.cost} </strike>
+                        </i>
+                        <i>
+                            Discount percents: ${bought.purchaseHistoryModel.discountsPercents}
+                        </i>
+                        <i>
+                            Date: ${bought.purchaseHistoryModel.prchaseDate}
+                        </i>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
     <div id="content">
     </div>

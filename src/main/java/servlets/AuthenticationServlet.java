@@ -1,12 +1,9 @@
 package servlets;
 
+import repositories.*;
 import services.UserService;
 import services.UserServiceImpl;
 import forms.SignInUserForm;
-import repositories.AuthRepository;
-import repositories.AuthRepositoryImpl;
-import repositories.UserRepository;
-import repositories.UserRepositoryImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.UnavailableException;
@@ -58,7 +55,8 @@ public class AuthenticationServlet extends HttpServlet {
 
             UserRepository userRepository = new UserRepositoryImpl(connection);
             AuthRepository authRepository = new AuthRepositoryImpl(connection);
-            userService = new UserServiceImpl(userRepository, authRepository);
+            DishRepository dishRepository = new DishRepositoryImpl(connection);
+            userService = new UserServiceImpl(userRepository, authRepository, dishRepository);
         } catch (SQLException | ClassNotFoundException e) {
             throw new UnavailableException("Unavailable");
         }

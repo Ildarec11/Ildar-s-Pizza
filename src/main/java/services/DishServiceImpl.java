@@ -2,6 +2,7 @@ package services;
 
 import forms.DishForm;
 import models.DishModel;
+import models.PurchaseHistoryModel;
 import repositories.DishRepository;
 
 import java.util.List;
@@ -20,8 +21,18 @@ public class DishServiceImpl implements DishService{
     }
 
     @Override
+    public DishModel findById(int dishId) {
+        return dishRepository.findById(dishId);
+    }
+
+    @Override
     public void addDish(DishForm dishForm) {
         dishRepository.addDish(dishForm);
+    }
+
+    @Override
+    public List<PurchaseHistoryModel> getPurchaseHistoryByUserId(int userId) {
+        return dishRepository.getPurchaseHistoryByUserId(userId);
     }
 
 }

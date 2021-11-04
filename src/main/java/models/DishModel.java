@@ -1,12 +1,13 @@
 package models;
 
 import java.io.File;
+import java.math.BigDecimal;
 
 public class DishModel {
     private int id;
     private String name;
     private String description;
-    private int cost;
+    private BigDecimal cost;
     private File image;
 
     public int getId() {
@@ -33,11 +34,11 @@ public class DishModel {
         this.description = description;
     }
 
-    public int getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 

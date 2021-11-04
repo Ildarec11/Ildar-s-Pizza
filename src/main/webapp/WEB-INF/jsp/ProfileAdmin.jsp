@@ -31,6 +31,44 @@
             </ul>
         </nav>
 
+        <c:set var="user" value='${requestScope["user"]}' />
+
+        <h1>${user.fullName}</h1>
+        <ul >
+            <li><h4>email: ${user.email}</h4></li>
+            <li><h4>balance: ${user.money}</h4></li>
+        </ul>
+
+        <h1>Purchase history</h1>
+        <div class="cards">
+            <c:forEach items="${bought}" var="bought">
+                <div class="card">
+                    <img class="card__image" src="https://fakeimg.pl/400x300/252c6a/fff/" alt="">
+                    <div class="card__content">
+                        <p>
+                                ${bought.dishModel.description}
+                        </p>
+                        <h2>
+                                ${bought.dishModel.name}
+                        </h2>
+                    </div>
+                    <div class="card__info">
+                        <div>
+                            <i class="material-icons">attach_money</i>
+                                ${bought.purchaseHistoryModel.cost}
+                        </div>
+                        <i>
+                            <strike> ${bought.dishModel.cost} </strike>
+                        </i>
+                        <i>
+                            Discount percents: ${bought.purchaseHistoryModel.discountsPercents}
+                        </i>
+                        <i>
+                            Date: ${bought.purchaseHistoryModel.purchaseDate}
+                        </i>
+                    </div>
+                </div>
+            </c:forEach>
 
         <div id="form">
             <input id="name" type="text" name="name" placeholder="Dish name"/>

@@ -3,13 +3,18 @@ package services;
 import forms.SignInUserForm;
 import forms.SignUpUserForm;
 import models.AuthModel;
+import models.DiscountModel;
+import models.DishModel;
 import models.UserModel;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import repositories.AuthRepository;
+import repositories.DishRepository;
 import repositories.UserRepository;
 
 import javax.servlet.http.Cookie;
+import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.UUID;
 
 public class UserServiceImpl implements UserService{
@@ -17,10 +22,12 @@ public class UserServiceImpl implements UserService{
     private UserRepository usersRepository;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private AuthRepository authRepository;
+    private DishRepository dishRepository;
 
-    public UserServiceImpl(UserRepository usersRepository, AuthRepository authRepository) {
+    public UserServiceImpl(UserRepository usersRepository, AuthRepository authRepository, DishRepository dishRepository) {
         this.usersRepository = usersRepository;
         this.authRepository = authRepository;
+        this.dishRepository = dishRepository;
     }
 
     @Override
@@ -69,5 +76,19 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserModel getUserByCookie(String cookieValue) {
         return authRepository.findByCookieValue(cookieValue).getUserModel();
+    }
+
+    @Override
+    public void buyDish(UserModel userModel, DishModel dishModel) {
+        Optional<DiscountModel> discountModel = dishRepository.getMaxDiscountByDishId(dishModel.getId());
+        BigDecimal dishCost = dishModel.getCost();
+        int percentageInt = 1;
+        if (discountModel.isPresent()) {
+            BigDecimal percentage = BigDecimal.valueOf((long) discountModel.get().getPercentage());
+            dishCost = dishCost.multiply(percentage);
+            percentageInt = discountModel.get().getPercentage();
+        }
+        usersRepository.spendMoney(userModel, dishCost);
+        dishRepository.writeDishToPurchaseHistory(userModel, dishModel, dishCost, percentageInt);
     }
 }

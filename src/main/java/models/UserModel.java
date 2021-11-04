@@ -1,17 +1,19 @@
 package models;
 
+import java.math.BigDecimal;
+
 public class UserModel {
     private int id;
     private String fullName;
     private String email;
     private String password;
-    private String money;
+    private BigDecimal money;
 
-    public String getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
     }
 
