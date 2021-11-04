@@ -26,7 +26,7 @@
             <ul class="menu-main">
                 <li><a href="/menu">Menu</a></li>
                 <li><a href="/discounts">Discounts</a></li>
-                <li><a href="/aboutUs">About us</a></li>
+                <li><a href="/about-us">About us</a></li>
                 <li><a href="/profile">Profile</a></li>
             </ul>
         </nav>

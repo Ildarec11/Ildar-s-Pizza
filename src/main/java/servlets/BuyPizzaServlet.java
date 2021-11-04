@@ -38,7 +38,6 @@ public class BuyPizzaServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
         Cookie[] cookies = req.getCookies();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("auth")) {

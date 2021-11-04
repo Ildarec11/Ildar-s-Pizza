@@ -26,7 +26,7 @@
             <ul class="menu-main">
                 <li><a href="/menu">Menu</a></li>
                 <li><a href="/discounts">Discounts</a></li>
-                <li><a href="/aboutUs">About us</a></li>
+                <li><a href="/about-us">About us</a></li>
                 <li><a href="/profile">Profile</a></li>
             </ul>
         </nav>
@@ -76,12 +76,9 @@
             <input id="description" type="text" name="description" placeholder="Description"/>
             <button id="sendProduct" onclick="sendDish()">Send!</button>
         </div>
-
     </div>
 </div>
 </div>
-
-
 
 <script>
     function sendDish(){

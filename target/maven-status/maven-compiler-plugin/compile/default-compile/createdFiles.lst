@@ -26,5 +26,6 @@ models/UserModel.class
 models/PurchaseHistoryModel.class
 servlets/AuthenticationServlet.class
 filters/ProfileFilter.class
+servlets/AboutUsServlet.class
 models/DiscountModel.class
 filters/MoneyFilter.class

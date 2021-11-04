@@ -28,7 +28,6 @@ public class AddDishServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
         ObjectMapper objectMapper = new ObjectMapper();
         DishForm dishForm = objectMapper.readValue(req.getParameter("dish"), DishForm.class);
         dishService.addDish(dishForm);
