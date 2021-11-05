@@ -56,7 +56,8 @@ public class AuthenticationServlet extends HttpServlet {
             UserRepository userRepository = new UserRepositoryImpl(connection);
             AuthRepository authRepository = new AuthRepositoryImpl(connection);
             DishRepository dishRepository = new DishRepositoryImpl(connection);
-            userService = new UserServiceImpl(userRepository, authRepository, dishRepository);
+            DiscountsRepository discountsRepository = new DiscountsRepositoryImpl(connection);
+            userService = new UserServiceImpl(userRepository, authRepository, dishRepository, discountsRepository);
         } catch (SQLException | ClassNotFoundException e) {
             throw new UnavailableException("Unavailable");
         }

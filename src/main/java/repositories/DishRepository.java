@@ -14,6 +14,5 @@ public interface DishRepository extends CrudRepository<DishModel> {
     DishModel findById(int dishId);
     void addDish(DishForm dishForm);
     void writeDishToPurchaseHistory(UserModel userModel, DishModel dishModel, BigDecimal cost, int discountPercentage);
-    Optional<DiscountModel> getMaxDiscountByDishId(int dishId);
     List<PurchaseHistoryModel> getPurchaseHistoryByUserId(int userId);
 }

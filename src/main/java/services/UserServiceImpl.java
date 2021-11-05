@@ -9,6 +9,7 @@ import models.UserModel;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import repositories.AuthRepository;
+import repositories.DiscountsRepository;
 import repositories.DishRepository;
 import repositories.UserRepository;
 
@@ -23,11 +24,14 @@ public class UserServiceImpl implements UserService{
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private AuthRepository authRepository;
     private DishRepository dishRepository;
+    private DiscountsRepository discountsRepository;
 
-    public UserServiceImpl(UserRepository usersRepository, AuthRepository authRepository, DishRepository dishRepository) {
+    public UserServiceImpl(UserRepository usersRepository, AuthRepository authRepository, DishRepository dishRepository,
+                           DiscountsRepository discountsRepository) {
         this.usersRepository = usersRepository;
         this.authRepository = authRepository;
         this.dishRepository = dishRepository;
+        this.discountsRepository = discountsRepository;
     }
 
     @Override
@@ -80,7 +84,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void buyDish(UserModel userModel, DishModel dishModel) {
-        Optional<DiscountModel> discountModel = dishRepository.getMaxDiscountByDishId(dishModel.getId());
+        Optional<DiscountModel> discountModel = discountsRepository.getMaxDiscountByDishId(dishModel.getId());
         BigDecimal dishCost = dishModel.getCost();
         int percentageInt = 1;
         if (discountModel.isPresent()) {

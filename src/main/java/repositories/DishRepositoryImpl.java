@@ -25,7 +25,6 @@ public class DishRepositoryImpl implements DishRepository {
     private final String SQL_FIND_DISH = "SELECT * FROM dish WHERE id = ?";
     private final String SQL_INSERT_DISH = "INSERT INTO dish(name, description, cost) values (?, ?, ?)";
     private final String SQL_ADD_DISH_TO_HISTORY = "INSERT INTO purchase_history(user_id, dish_id, cost, discount_percents, purchase_date) VALUES (?, ?, ?, ?, ?)";
-    private final String SQL_GET_DISCOUNT = "SELECT max(percentage) FROM discounts WHERE dish_id=? AND end_date <= ?";
     private final String SQL_GET_PURCHASE_HISTORY = "SELECT * FROM purchase_history WHERE user_id = ?";
 
     public DishRepositoryImpl(Connection connection) {
@@ -75,16 +74,6 @@ public class DishRepositoryImpl implements DishRepository {
     public void deleteById(int id) {
 
     }
-
-    private  RowMapper<DiscountModel> rowMapDiscount = ((resultSet) -> {
-        DiscountModel discountModel = new DiscountModel();
-        discountModel.setDishId(resultSet.getInt("dish_id"));
-        discountModel.setId(resultSet.getInt("id"));
-        discountModel.setPercentage(resultSet.getInt("percentage"));
-        discountModel.setStartDate(resultSet.getDate("start_date"));
-        discountModel.setEndDate(resultSet.getDate("end_date"));
-        return discountModel;
-    });
 
     private RowMapper<List<DishModel>> rowMapDishes = ((resultSet) -> {
         List<DishModel> products = new ArrayList<>();
@@ -139,24 +128,6 @@ public class DishRepositoryImpl implements DishRepository {
         } catch (Exception e) {
             System.out.println("Cant write to purchase history");
         }
-    }
-
-    @Override
-    public Optional<DiscountModel> getMaxDiscountByDishId(int dishId) {
-        ResultSet resultSet;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_DISCOUNT);
-            preparedStatement.setInt(1, dishId);
-            preparedStatement.setDate(2, Date.valueOf(LocalDate.now()));
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return Optional.ofNullable(rowMapDiscount.rowMap(resultSet));
-            }
-            return Optional.empty();
-        } catch (Exception e) {
-            System.out.println("Cant write to purchase history");
-        }
-        return Optional.empty();
     }
 
     @Override
