@@ -34,5 +34,4 @@ public class DishServiceImpl implements DishService{
     public List<PurchaseHistoryModel> getPurchaseHistoryByUserId(int userId) {
         return dishRepository.getPurchaseHistoryByUserId(userId);
     }
-
 }

@@ -39,12 +39,12 @@ public class SignInFIlter extends HttpFilter {
                     req.setAttribute("auth", authModel);
                     //вход с передачей данных о пользователе
                     chain.doFilter(req, res);
-                    System.out.println("вошли");
-                } else {
-                    ((HttpServletResponse) res).sendRedirect("/signIn");
+                    System.out.println("entered");
                 }
             }
         }
+        System.out.println("not found cookie");
+        ((HttpServletResponse) res).sendRedirect("/signIn");
     }
 
     @Override

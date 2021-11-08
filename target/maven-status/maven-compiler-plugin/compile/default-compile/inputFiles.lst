@@ -1,7 +1,9 @@
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/servlets/AddDishServlet.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/repositories/DishRepositoryImpl.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/repositories/AuthRepository.java
+/Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/repositories/DiscountsRepositoryImpl.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/services/UserService.java
+/Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/services/DiscountsServiceImpl.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/models/AuthModel.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/models/BoughtDish.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/forms/DishForm.java
@@ -12,6 +14,7 @@
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/models/PurchaseHistoryModel.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/forms/SignInUserForm.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/repositories/AuthRepositoryImpl.java
+/Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/repositories/DiscountsRepository.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/services/DishService.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/models/DiscountModel.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/filters/ProfileFilter.java
@@ -23,6 +26,7 @@
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/filters/MoneyFilter.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/filters/SignInFIlter.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/repositories/UserRepository.java
+/Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/services/DiscountsService.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/servlets/RegistrationServlet.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/repositories/CrudRepository.java
 /Users/ildar/IdeaProjects/Ildar's Pizza (Semester Work 1)/src/main/java/servlets/AboutUsServlet.java

@@ -4,6 +4,7 @@ import models.DiscountModel;
 import repositories.DiscountsRepository;
 import repositories.DishRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public class DiscountsServiceImpl implements DiscountsService {
@@ -24,4 +25,8 @@ public class DiscountsServiceImpl implements DiscountsService {
         return discountsRepository.getMaxDiscountByDishId(dishId);
     }
 
+    @Override
+    public List<DiscountModel> findAll() {
+        return discountsRepository.findAll();
+    }
 }
