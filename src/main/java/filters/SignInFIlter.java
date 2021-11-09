@@ -44,7 +44,7 @@ public class SignInFIlter extends HttpFilter {
             }
         }
         System.out.println("not found cookie");
-        ((HttpServletResponse) res).sendRedirect("/signIn");
+        httpServletResponse.sendRedirect("/signIn");
     }
 
     @Override
